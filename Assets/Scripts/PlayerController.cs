@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController
 {
-    PlayerModel playerModel;
+    private readonly Player player;
+    private readonly Camera mainCamera;
+    public PlayerController(Player player, Camera mainCamera)
+    {
+        this.player = player;
+        this.mainCamera = mainCamera;
+    }
     public void Start()
     {
-        playerModel = new PlayerModel();
     }
-    public void FixedUpdate()
+
+    public void Execute()
     {
-        playerModel.PlayerControl(); //вылетает NullReferenceException, не могу понять в чем дело
+        player.Move();
     }
 }
