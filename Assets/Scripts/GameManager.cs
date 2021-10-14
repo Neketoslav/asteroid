@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         reference = new Reference();
-         playerController = new PlayerController(reference.Player, reference.MainCamera);
+        playerController = new PlayerController(reference.Player, reference.MainCamera);
 
         EnemyPool enemyPool = new EnemyPool(5);
 

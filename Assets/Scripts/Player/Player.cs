@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] internal Transform barrel;
 
     internal IShot shipShot;
+    internal IShot weaponProxy;
+    internal UnlockWeapon unlockWeapon;
     internal Ship ship { get; private set; }
 
     private Player player;
@@ -32,6 +34,9 @@ public class Player : MonoBehaviour
         var rotation = new RotationShip(transform);
         ship = new Ship(move, rotation);
         shipShot = new ShipShot(sprite, barrel);
+
+        var unlockWeapon = new UnlockWeapon(false);  
+        var weaponProxy = new ProxyWeapon(shipShot, unlockWeapon);
     }
 
     public void Move()
@@ -48,7 +53,8 @@ public class Player : MonoBehaviour
         {
             ship.RemoveAcceleration();
         }
-        shipShot.Shot(sprite);
+        //shipShot.Shot();
+        weaponProxy.Shot();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

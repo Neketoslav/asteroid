@@ -35,6 +35,7 @@ public static partial class BuilderBullet
     {
         var component = gameObject.GetOrAddComponent<SpriteRenderer>();
         component.sprite = sprite;
+        component.sortingOrder = 1;
         return gameObject;
     }
     private static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component

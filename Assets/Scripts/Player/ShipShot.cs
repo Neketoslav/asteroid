@@ -13,7 +13,7 @@ public class ShipShot : MonoBehaviour, IShot
         this.sprite = sprite;
         this.barrel = barrel;
     }
-    public void Shot(Sprite sprite)
+    public void Shot()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
