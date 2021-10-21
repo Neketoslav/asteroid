@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public interface IShot
+public sealed class Spawn : MonoBehaviour
 {
-    void Shot();
 }

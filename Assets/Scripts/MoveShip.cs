@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MoveShip : IMove
 {
-    private Rigidbody2D rb;
+    private Rigidbody rb;
     private Vector2 direction;
     public float force { get; protected set; }
 
-    public MoveShip(Rigidbody2D rb, float force)
+    public MoveShip(Rigidbody rb, float force)
     {
         this.rb = rb;
         this.force = force;

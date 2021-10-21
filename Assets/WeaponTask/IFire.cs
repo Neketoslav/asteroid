@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IShot
+namespace weaponMod
 {
-    void Shot();
+    public interface IFire
+    {
+        void Fire();
+    }
 }
