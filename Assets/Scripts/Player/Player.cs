@@ -11,10 +11,10 @@ public class Player : MonoBehaviour
 
     internal Vector3 direction;
 
-    internal Rigidbody2D rb;
-    internal Rigidbody2D rbRocket;
+    internal Rigidbody rb;
+    internal Rigidbody rbRocket;
 
-    [SerializeField] internal Sprite sprite;
+    internal Sprite sprite;
     [SerializeField] internal Transform barrel;
 
     internal IShot shipShot;
@@ -26,8 +26,8 @@ public class Player : MonoBehaviour
     private Camera mainCamera;
     public void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rbRocket = Resources.Load<Rigidbody2D>("Rocket");
+        rb = GetComponent<Rigidbody>();
+        rbRocket = Resources.Load<Rigidbody>("Rocket");
         sprite = Resources.Load<Sprite>("Bullet");
         mainCamera = Camera.main;
         var move = new Acceleration(rb, force, acceleration);
@@ -53,24 +53,24 @@ public class Player : MonoBehaviour
         {
             ship.RemoveAcceleration();
         }
-        //shipShot.Shot();
-        weaponProxy.Shot();
+        shipShot.Shot();
+        //weaponProxy.Shot();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider other)
     {
-
-        if (CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
+            health--;
             if (health <= 0)
             {
+                Debug.Log("death");
                 Destroy(gameObject);
             }
             else
             {
-                health--;
+                Debug.Log("damage");    
             }
         }
-
     }
 }

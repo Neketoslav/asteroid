@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-internal sealed class PrototypeEnemy : MonoBehaviour
+internal sealed class PrototypeEnemy
 {
     private void Start()
     {

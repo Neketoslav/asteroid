@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
 internal abstract class Enemy : MonoBehaviour
 {
     public static IEnemyFactory Factory;
     public Health health;
+
     public static Asteroid CreateAsteroidEnemy (Health hp)
     {
         var enemy = Instantiate(Resources.Load<Asteroid>("Asteroid"));
@@ -20,8 +20,20 @@ internal abstract class Enemy : MonoBehaviour
         enemy.health = hp;
         return enemy;
     }
+
     public void DependencyInjectHealth(Health hp)
     {
         health = hp;
+    }
+    public abstract void ScoreLoot();
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+            ScoreLoot();
+        }
     }
 }

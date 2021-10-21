@@ -7,6 +7,7 @@ public static partial class BuilderBullet
     public static GameObject SetName(this GameObject gameObject, string name)
     {
         gameObject.name = name;
+        gameObject.tag = "Bullet";
         return gameObject;
     }
 
@@ -17,19 +18,26 @@ public static partial class BuilderBullet
         return gameObject;
     }
 
-    public static GameObject AddRigidbody2D(this GameObject gameObject, float mass, float gravity)
+    public static GameObject AddRigidbody(this GameObject gameObject, float mass, float gravity)
     {
-        var component = gameObject.GetOrAddComponent<Rigidbody2D>();
+        var component = gameObject.GetOrAddComponent<Rigidbody>();
         component.mass = mass;
-        component.gravityScale = gravity;
+        component.useGravity = false;
         return gameObject;
     }
 
-    public static GameObject AddBoxCollider2D(this GameObject gameObject)
+    public static GameObject AddBoxCollider(this GameObject gameObject)
     {
-        gameObject.GetOrAddComponent<BoxCollider2D>();
+        var component = gameObject.GetOrAddComponent<BoxCollider>();
+        component.isTrigger = true;
         return gameObject;
     }
+    public static GameObject AddScript(this GameObject gameObject)
+    {
+        var component = gameObject.GetOrAddComponent<Bullet>();
+        return gameObject;
+    }
+
 
     public static GameObject AddSprite(this GameObject gameObject, Sprite sprite)
     {

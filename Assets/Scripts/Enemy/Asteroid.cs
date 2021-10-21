@@ -10,6 +10,8 @@ internal sealed class Asteroid : Enemy
 
     public float speed = 0.001f;
 
+    public event Action<int> OnPointChange = delegate (int i) { };
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -20,4 +22,8 @@ internal sealed class Asteroid : Enemy
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed);
     }
 
+    public override void ScoreLoot()
+    {
+        OnPointChange.Invoke(100);
+    }
 }
