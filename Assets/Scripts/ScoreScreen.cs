@@ -9,7 +9,7 @@ public sealed class ScoreScreen
 
     public ScoreScreen()
     {
-        text = Object.FindObjectOfType<Text>();
+        text = Object.FindObjectOfType<ScoreLog>().GetComponent<Text>();
     }
 
     public void Display(int value)

@@ -11,6 +11,7 @@ internal sealed class Asteroid : Enemy
     public float speed = 0.001f;
 
     public event Action<int> OnPointChange = delegate (int i) { };
+    public event Action<string> DeathLog = delegate (string c) { };
 
     private void Start()
     {
@@ -25,5 +26,6 @@ internal sealed class Asteroid : Enemy
     public override void ScoreLoot()
     {
         OnPointChange.Invoke(100);
+        DeathLog.Invoke("Астероид");
     }
 }

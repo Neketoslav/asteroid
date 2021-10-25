@@ -6,6 +6,7 @@ public sealed class EnemySpawner : MonoBehaviour
 {
     private Spawn[] listSpawn;
     private ScoreScreen scoreScreen;
+    private DisplayMessage displayMessage;
   
     private int indexSpawn;
     private int indexEnemy;
@@ -16,6 +17,7 @@ public sealed class EnemySpawner : MonoBehaviour
     public void Start()
     {
         scoreScreen = new ScoreScreen();
+        displayMessage = new DisplayMessage();
         listSpawn = Object.FindObjectsOfType<Spawn>();
     }
 
@@ -34,19 +36,20 @@ public sealed class EnemySpawner : MonoBehaviour
         indexSpawn = Random.Range(0, listSpawn.Length);
         indexEnemy = Random.Range(1, 3);
 
-        print(indexEnemy);
         yield return new WaitForSeconds(seconds);
         if (indexEnemy == 1)
         {
             var enemy = Enemy.CreateAsteroidEnemy(new Health(100f, 100f));
             enemy.transform.position = listSpawn[indexSpawn].transform.position;
             enemy.OnPointChange += OnPointChange;
+            enemy.DeathLog += DeathLog;
         }
         if(indexEnemy == 2)
         {
             var enemy = Enemy.CreateFireAsteroidEnemy(new Health(100f, 100f));
             enemy.transform.position = listSpawn[indexSpawn].transform.position;
             enemy.OnPointChange += OnPointChange;
+            enemy.DeathLog += DeathLog;
         }
 
         isSpawning = false;
@@ -55,5 +58,9 @@ public sealed class EnemySpawner : MonoBehaviour
     {
         countPoints += value;
         scoreScreen.Display(countPoints);
+    }
+    private void DeathLog(string name)
+    {
+        displayMessage.Display(name);
     }
 }
